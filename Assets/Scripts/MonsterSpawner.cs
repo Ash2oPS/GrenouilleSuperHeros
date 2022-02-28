@@ -14,9 +14,13 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField]
     private TextMesh monsterNameText;
 
-    private Monstre_SO monsterTemplate;
+    [HideInInspector]
+    public Monstre_SO monsterTemplate;
 
     private float timer;
+
+    [SerializeField]
+    private hpGauge gauge;
 
     private void Update()
     {
@@ -24,7 +28,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if (timer > 2)
+        if (timer > 0.5f)
         {
             SpawnMonster();
             timer = 0;
@@ -41,9 +45,14 @@ public class MonsterSpawner : MonoBehaviour
     {
         NewMonster();
 
+        monster.dead = false;
+
         monster.GetComponent<SpriteRenderer>().sprite = monsterTemplate.monsterSprite;
-        monster.hp = Random.Range(monsterTemplate.hpMin, monsterTemplate.hpMax + 1);
+        monster.maxHp = Random.Range(monsterTemplate.hpMin, monsterTemplate.hpMax + 1);
+        monster.hp = monster.maxHp;
         monster.gold = Random.Range(monsterTemplate.moneyMin, monsterTemplate.moneyMax + 1);
         monsterNameText.text = monsterTemplate.monsterName;
+
+        gauge.SetToAlive();
     }
 }

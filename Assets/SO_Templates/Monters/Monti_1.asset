@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b15a290d97444e94fa9ba610a03b5caa, type: 3}
-  m_Name: DigimonWorld_01
+  m_Name: Monti_1
   m_EditorClassIdentifier: 
-  monsterName: Digimone Ouorlde
-  monsterSprite: {fileID: 21300000, guid: 354f5db189411c94ead370ffa5ea52d9, type: 3}
-  hpMin: 12
-  hpMax: 15
-  moneyMin: 80
-  moneyMax: 130
+  monsterName: Monti
+  monsterSprite: {fileID: 21300000, guid: 497001e8151400f43a02d2bda6ecaa25, type: 3}
+  hpMin: 3
+  hpMax: 3
+  moneyMin: 10
+  moneyMax: 10
