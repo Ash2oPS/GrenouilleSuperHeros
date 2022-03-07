@@ -569,7 +569,6 @@ GameObject:
   - component: {fileID: 931429876}
   - component: {fileID: 931429875}
   - component: {fileID: 931429877}
-  - component: {fileID: 931429878}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -661,11 +660,9 @@ MonoBehaviour:
   maxHp: 0
   hp: 0
   gold: 0
-  isDying: 0
   dead: 1
   monsterNameText: {fileID: 1189398782}
-  animTransformHit: {fileID: 931429877}
-  animTransformDie: {fileID: 931429878}
+  animator: {fileID: 931429877}
   gauge: {fileID: 308598605}
 --- !u!114 &931429875
 MonoBehaviour:
@@ -684,24 +681,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 931429874}
         m_TargetAssemblyTypeName: Monster, Assembly-CSharp
-        m_MethodName: LoseHP
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 931429874}
-        m_TargetAssemblyTypeName: Monster, Assembly-CSharp
-        m_MethodName: AnimHit
+        m_MethodName: Hit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -741,56 +726,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7, y: 7}
   m_EdgeRadius: 0
---- !u!114 &931429877
-MonoBehaviour:
+--- !u!95 &931429877
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931429871}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e523e42c86b3b054babe97c4d7088414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: HIt
-  squareScales:
-  - {x: 1, y: 1, z: 1}
-  - {x: 0.95, y: 0.95, z: 1}
-  - {x: 1.05, y: 1.05, z: 1}
-  - {x: 1, y: 1, z: 1}
-  - {x: 1, y: 1, z: 1}
-  scaleTimes:
-  - 0
-  - 0.02
-  - 0.04
-  - 0.06
-  - 10
-  canGo: 0
---- !u!114 &931429878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931429871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e523e42c86b3b054babe97c4d7088414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: die
-  squareScales:
-  - {x: 1, y: 1, z: 1}
-  - {x: 1.2, y: 1.2, z: 1}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
-  scaleTimes:
-  - 0
-  - 0.1
-  - 0.15
-  - 10
-  canGo: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 757aa99bab1c94b42a79a96aa2ea345e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1189398780
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +785,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189398780}
-  m_Text: gggggggg
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -897,6 +851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1491198281}
   - component: {fileID: 1491198280}
+  - component: {fileID: 1491198279}
   m_Layer: 0
   m_Name: -GM-
   m_TagString: Untagged
@@ -904,6 +859,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1491198279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491198278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d3afe7bf049b24689764d0d8f48900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 931429874}
+  canAutoclik: 1
 --- !u!114 &1491198280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,6 +885,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0038b2b5831a44649a5d7c0f6cf031d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePerClick: 1
+  damageAutoclicker: 1
+  autoClickerDelay: 10
   goldText: {fileID: 1935808992}
 --- !u!4 &1491198281
 Transform:

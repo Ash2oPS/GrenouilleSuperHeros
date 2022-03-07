@@ -7,10 +7,11 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private MonsterSpawner monsterSpawner;
 
-    public int maxHp, hp, gold;
+    public float maxHp, hp;
+    public int gold;
 
     [HideInInspector]
-    public bool isDying = false, dead = true;
+    public bool dead = true;
 
     private GameManager gm;
 
@@ -18,7 +19,7 @@ public class Monster : MonoBehaviour
     private TextMesh monsterNameText;
 
     [SerializeField]
-    private AnimTransform animTransformHit, animTransformDie;
+    private Animator animator;
 
     [SerializeField]
     private hpGauge gauge;
@@ -32,61 +33,61 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        if (isDying)
-        {
-            if (timer < 0.15)
-            {
-                timer += Time.deltaTime;
-            }
-            else
-            {
-                timer = 0;
-                isDying = false;
-                Die();
-            }
-        }
+        //if (isDying)
+        //{
+        //    if (timer < 0.15)
+        //    {
+        //        timer += Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        timer = 0;
+        //        isDying = false;
+        //        Die();
+        //    }
+        //}
     }
 
-    public void LoseHP(int value)
+    public void LoseHP(float value, bool isAuto)
     {
-        if (!isDying && !dead)
+        if (!dead)
         {
             hp -= value;
 
             if (hp <= 0)
             {
-                Dying();
                 hp = 0;
+
+                animator.SetTrigger("Die");
+            }
+            else if (!isAuto)
+            {
+                animator.SetTrigger("Hit");
             }
         }
 
         gauge.UpdateGauge();
     }
 
-    private void Dying()
+    public void Die()
     {
-        isDying = true;
-
-        animTransformDie.SetCanGo();
-    }
-
-    private void Die()
-    {
+        dead = true;
         monsterSpawner.monsterTemplate = null;
         GetComponent<SpriteRenderer>().sprite = null;
         gm.AddGold(gold);
         monsterNameText.text = "";
 
         gauge.SetToDead();
-
-        transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public void AnimHit()
+    public void Hit()
     {
-        if (!dead && !isDying)
-        {
-            animTransformHit.SetCanGo();
-        }
+        LoseHP(gm.damagePerClick, false);
+    }
+
+    public void AutoclickerHit()
+    {
+        print("coucou");
+        LoseHP(gm.damageAutoclicker / gm.autoClickerDelay, true);
     }
 }

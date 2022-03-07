@@ -37,8 +37,8 @@ public class hpGauge : MonoBehaviour
 
     public void UpdateGauge()
     {
-        int maxHp = monster.maxHp;
-        int hp = monster.hp;
+        float maxHp = monster.maxHp;
+        float hp = monster.hp;
 
         float newX = (float)hp / (float)maxHp;
 

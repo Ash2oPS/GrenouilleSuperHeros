@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     private int gold;
 
+    public float damagePerClick, damageAutoclicker, autoClickerDelay;
+
     [SerializeField]
     private TextMesh goldText;
 
